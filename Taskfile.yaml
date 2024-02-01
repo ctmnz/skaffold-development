@@ -1,0 +1,42 @@
+version: '3'
+env:
+  TaskInfo: "Create or destroy local kubernetes cluster"
+
+tasks:
+  init:
+    cmds:
+      - echo "task {{.TaskInfo}}"
+  
+  install-deps:
+    cmds:
+      - echo "Install dependencies"
+      # install homebrew
+      # install docker
+      # install kind
+      # install kubectl
+      # install istioctl
+      # install helm
+
+  create-kind-cluster:
+    cmds:
+      - kind create cluster --name=dev-cluster --config=dev-cluster.yaml
+      - kubectl create serviceaccount --namespace kube-system devadmin
+      - kubectl create clusterrolebinding devadmin-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:devadmin
+      - istioctl install -f ./istio-profile.yaml --skip-confirmation
+      - kubectl patch service/istio-ingressgateway -n istio-system --patch-file patches/gateway-svc-patch-two.yaml
+      - kubectl label ns default istio-injection=enabled --overwrite
+      - kubectl wait pods --for=condition=Ready -l app=istiod -n istio-system
+      - kubectl apply -f ./services/jaeger.yaml
+      - kubectl apply -f ./services/prometheus.yaml
+      - kubectl apply -f ./services/grafana.yaml
+      - kubectl apply -f ./services/kiali.yaml
+      - kubectl apply -f ./services/cert-manager.yaml
+      - kubectl apply -f ./services/zipkin.yaml
+      - kubectl apply -f ./apps/grafana/gateway.yaml
+      - kubectl apply -f ./apps/kiali-gateway/gateway.yaml
+      - kubectl apply -f ./apps/jaeger/gateway.yaml
+      - istioctl upgrade --skip-confirmation
+  destroy-kind-cluster:
+    cmds:
+      - kind delete cluster --name dev-cluster
+

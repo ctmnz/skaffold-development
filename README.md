@@ -4,6 +4,7 @@
  - Install [Docker for Desktop](https://www.docker.com/products/docker-desktop/)
  - Install the follwoing CLI tools
 ```bash
+brew install go-task
 brew install skaffold
 brew install istioctl
 brew install kind
@@ -12,7 +13,7 @@ brew install helm
 
 ## Installation
 ```
-./cluster-init.sh
+task create-kind-cluster
 ```
 | :exclamation:  You should wait for all the pods to be ready |
 |-------------------------------------------------------------|
@@ -63,6 +64,9 @@ Skaffold will constanly watching for changes in your files. When triggered it wi
 ## Clean up procedures
 
 You can press Ctrl+C to stop the `scaffold dev` process. This will clean up the resources installed by skaffold
-To remove the kubernetes cluster completely just start the `./cluster-cleanup.sh` bash script in the project's root folder.
+To remove the kubernetes cluster completely execute:
+```bash
+task destroy-kind-cluster
+```
 
 
