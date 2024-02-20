@@ -28,6 +28,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
   <br>
   <p> This paragraph is written just to have more text </p>
   <p> I hate lorem ipsum generated text, so I prefer to write this nonsense here </p>
+  <p> I hate lorem ipsum generated text, so I prefer to write this nonsense here </p>
   </body>
   `
 	w.Write([]byte(mypage))
