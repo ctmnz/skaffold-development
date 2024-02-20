@@ -15,9 +15,13 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    repoURL: https://github.com/ctmnz/skaffold-development/
-    targetRevision: livedemo
-    path: Skaffold/k8s/livedemo/ 
+    chart: app-helm
+    repoURL: docker.io/ctmnz
+    targetRevision: 0.1.0
+    helm:
+      releaseName: app01live
+      valueFiles:
+      - values.yaml
   syncPolicy:
     automated:
       prune: true
