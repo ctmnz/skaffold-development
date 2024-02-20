@@ -37,7 +37,7 @@ tasks:
       - kubectl apply -n argocd -f ./services/argocd.yaml
       - kubectl create -n istio-system secret tls argocd-tls-credential --key=apps-ingress/argocd/tls-files/argocd.127.0.0.1.nip.io.key --cert=apps-ingress/argocd/tls-files/argocd.127.0.0.1.nip.io.crt
       - kubectl apply -f ./apps-ingress/argocd/gateway.yaml
-      - kubectl apply -f -n argocd ./services/argocd-image-updater.yaml
+      - kubectl apply -n argocd -f ./services/argocd-image-updater.yaml
       - kubectl apply -f ./apps/grafana/gateway.yaml
       - kubectl apply -f ./apps/kiali-gateway/gateway.yaml
       - kubectl apply -f ./apps/jaeger/gateway.yaml

@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: app01live
+  namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -10,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: /Skaffold/k8s/livedemo/ 
+    path: ./Skaffold/k8s/livedemo/ 
     repoURL: https://github.com/ctmnz/skaffold-development/
     targetRevision: livedemo
   syncPolicy:

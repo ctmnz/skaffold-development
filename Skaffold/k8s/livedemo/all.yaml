@@ -78,7 +78,7 @@ spec:
     spec:
       containers:
       - name: hello
-        image: app
+        image: ctmnz/simpleapp
         ports:
         - containerPort: 8080
 ---
