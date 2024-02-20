@@ -79,7 +79,7 @@ spec:
         #includeAdditionalHeadersInCheck: 
         #  X-Auth-Request-Redirect: https://%REQ(Host)%/admin
   profile: demo
-  tag: 1.18.2
+  tag: 1.20.3
   values:
     base:
       enableCRDTemplates: false
