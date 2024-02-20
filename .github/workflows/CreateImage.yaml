@@ -21,6 +21,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      - name: Check out the repository to the runner
+        uses: actions/checkout@v4
       - name: ls -ln
         run: pwd; ls -ln
       -
