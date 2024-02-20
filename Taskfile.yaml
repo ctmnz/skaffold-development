@@ -23,6 +23,7 @@ tasks:
       - kubectl create serviceaccount --namespace kube-system devadmin
       - kubectl create clusterrolebinding devadmin-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:devadmin
       - istioctl install -f ./istio-profile.yaml --skip-confirmation
+      - istioctl upgrade --skip-confirmation
       - kubectl patch service/istio-ingressgateway -n istio-system --patch-file patches/gateway-svc-patch-two.yaml
       - kubectl label ns default istio-injection=enabled --overwrite
       - kubectl wait pods --for=condition=Ready -l app=istiod -n istio-system
@@ -31,11 +32,11 @@ tasks:
       - kubectl apply -f ./services/grafana.yaml
       - kubectl apply -f ./services/kiali.yaml
       - kubectl apply -f ./services/cert-manager.yaml
-      - kubectl apply -f ./services/zipkin.yaml
+        #      - kubectl apply -f ./services/zipkin.yaml
+      - kubectl apply -f ./services/jaeger.yaml
       - kubectl apply -f ./apps/grafana/gateway.yaml
       - kubectl apply -f ./apps/kiali-gateway/gateway.yaml
       - kubectl apply -f ./apps/jaeger/gateway.yaml
-      - istioctl upgrade --skip-confirmation
   destroy-kind-cluster:
     cmds:
       - kind delete cluster --name dev-cluster

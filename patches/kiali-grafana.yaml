@@ -5,7 +5,7 @@ spec:
       # Grafana service name is "grafana" and is in the "telemetry" namespace.
       in_cluster_url: 'http://grafana.istio-system:3000/'
       # Public facing URL of Grafana
-      url: 'http://grafana.127.0.0.1/'
+      url: 'http://grafana.127.0.0.1.nip.io/'
       dashboards:
       - name: "Istio Service Dashboard"
         variables:
