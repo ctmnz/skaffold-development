@@ -78,7 +78,7 @@ spec:
     spec:
       containers:
       - name: hello
-        image: ctmnz/simpleapp
+        image: {{ .Values.image.name }}:{{ .Values.image.tag }}
         ports:
         - containerPort: 8080
 ---

@@ -2,9 +2,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd-image-updater.argoproj.io/image-list: simpleapp=docker.io/ctmnz/simpleapp:latest
-    argocd-image-updater.argoproj.io/simpleapp.update-strategy: latest
-    argocd-image-updater.argoproj.io/simpleapp.allow-tags: latest
+    argocd-image-updater.argoproj.io/image-list: simpleapp=ctmnz/simpleapp:latest
+    argocd-image-updater.argoproj.io/simpleapp.update-strategy: digest
   name: app01live
   namespace: argocd
   finalizers:
@@ -17,13 +16,20 @@ spec:
   source:
     chart: app-helm
     repoURL: docker.io/ctmnz
-    targetRevision: 0.1.0
+    targetRevision: 0.1.2
     helm:
-      releaseName: app01live
-      valueFiles:
-      - values.yaml
+      parameters:
+        - name: "image.name"
+          value: ctmnz/simpleapp
+        - name: "image.tag"
+          value: latest 
   syncPolicy:
     automated:
       prune: true
+      selfHeal: true
+      allowEmpty: false
     syncOptions:
-    - CreateNamespace=true
+      - Validate=false
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
