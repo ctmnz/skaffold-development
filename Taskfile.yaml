@@ -41,7 +41,6 @@ tasks:
       - kubectl apply -f ./apps/grafana/gateway.yaml
       - kubectl apply -f ./apps/kiali-gateway/gateway.yaml
       - kubectl apply -f ./apps/jaeger/gateway.yaml
-      - kubectl apply -f ./argo-apps/app01live.yaml
 
   destroy-kind-cluster:
     cmds:
@@ -49,3 +48,10 @@ tasks:
   get-argocd-admin-password:
     cmds:
       - kubectl get secrets -n argocd argocd-initial-admin-secret -o jsonpath={.data.password} | base64 -d
+
+  deploy-app01live:
+    cmds:
+      - kubectl apply -f ./argo-apps/app01live.yaml
+  undeploy-app01live:
+    cmds:
+      - kubectl delete -f ./argo-apps/app01live.yaml
