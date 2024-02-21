@@ -18,7 +18,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 	mypage := `
   <html>
   <head>
-  <title>This is html page</title>
+  <title> + This is html page + </title>
   </head>
   <body>
   <h1>Hello there!</h1>
