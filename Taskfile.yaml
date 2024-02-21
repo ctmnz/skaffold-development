@@ -41,6 +41,7 @@ tasks:
       - kubectl apply -f ./apps/grafana/gateway.yaml
       - kubectl apply -f ./apps/kiali-gateway/gateway.yaml
       - kubectl apply -f ./apps/jaeger/gateway.yaml
+      - kubectl apply -f ./argo-apps/app01live.yaml
 
   destroy-kind-cluster:
     cmds:
