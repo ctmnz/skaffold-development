@@ -21,10 +21,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
   <title>This is html page</title>
   </head>
   <body>
-  <h1>Hello there!</h1>
-  <h1>Hello there!</h1>
-  <h1>Hello there!</h1>
-  <h1>Hello there!</h1>
+  <h1>Hello there! Hello! </h1>
   <p>This is a paragraph. More text for this paragraph.</p>
   <br>
   <img src="https://physicsworld.com/wp-content/uploads/2018/04/65-12-163-FEYNMAN.jpg" alt="Feynman" width="635" height="650">
